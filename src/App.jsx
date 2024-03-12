@@ -1,18 +1,34 @@
-// import conf from "./conf/conf"
-// import authService from "./appwrite/auth"
+
+import { useEffect } from "react"
+import authService from "./appwrite/auth"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { login, logout } from "./store/authSlice"
+import { Footer, Header } from "./components"
 
 function App() {
-  // console.table([import.meta.env.VITE_APPWRITE_URL, import.meta.env.VITE_PROJECT_ID, import.meta.env.VITE_DATABASE_ID, 
-  // import.meta.env.VITE_COLLECTION_ID, import.meta.env.VITE_BUCKET_ID])
-  // console.log(conf.appwriteUrl)
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
-  // console.log(authService)
+  useEffect(() => {
+    authService.getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }))
+        } else {
+          dispatch(logout())
+        }
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
-  return (
-    <>
-      <h1 className="text-xl">Journey</h1>
-    </>
-  )
+  return loading ? (<div>Loading</div>)
+    : (
+      <div>
+        <Header />
+        <Footer />
+      </div>
+    )
 }
 
 export default App
