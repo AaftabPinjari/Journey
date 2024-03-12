@@ -1,0 +1,37 @@
+Environment variables
+
+create .env and prefix every  variable with "VITE" eg: VITE_SECRET_KEY
+create .env.sample to have variables for your reference **not important just for memory
+
+In Appwrite
+
+create new project
+in settings of the project we have project ID and API endpoint --> copy them --> paste Appwrite Url and projectId
+
+create new database
+copy its id and pase in database ID in .env
+
+create new collection in that database --> copy its ID and pastte in .env
+**in the settings of collection assign a role to all users to CRUD on database
+
+in the collection create attributes
+title --> string --> size 255 --> required
+content --> string --> size 255 --> required
+featuredImage --> string --> size 255 --> required
+status --> string --> 
+userId --> string --> size 255 --> required
+
+in the collection create index
+attribute to use is status --> asscending order
+
+in storage 
+create bucket --> name images --> copy and paste bucketId
+in settings of bucket --> add role to all users for CRUD 
+set size of file to 50 mb for free plan 
+
+
+
+
+
+
+
